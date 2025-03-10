@@ -1,21 +1,37 @@
-MIT License
+# depthmot
+Improving Multi-Object Tracking Using Depth - A Comprehensive Literature Review
 
-Copyright (c) 2024 Allan Cheboiwo, Tarek Alkabbani, Haoyu Wang, Vanessa Laurel Hariyanto
+## Overview
+This repository contains a literature review conducted by Group 10 for COSC 444/544: Computer Vision. The project explores Multi-Object Tracking (MOT) challenges, focusing on occlusion and ID switching in pedestrian tracking. We evaluate traditional methods like the Kalman Filter (e.g., SORT) and propose integrating depth information to enhance tracking accuracy and robustness.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+### Authors
+- Allan Cheboiwo (#73661290)
+- Tarek Alkabbani (#84930239)
+- Haoyu Wang (#42343871)
+- Vanessa Laurel Hariyanto (#72484546)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+### Course
+- **COSC 444/544: Computer Vision**
+- **Date**: February 24, 2024
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## Abstract
+Multiple Object Tracking (MOT) is a critical computer vision task used in surveillance, autonomous driving, and traffic monitoring. Despite advances in deep learning, challenges like occlusion and ID switching persist, especially in pedestrian tracking. This review analyzes traditional methods (e.g., Kalman Filter, Hungarian Algorithm) and proposes a depth-enhanced approach to mitigate these issues, balancing accuracy and efficiency for real-world applications.
+
+## Contents
+- **[Literature Review Report](docs/Literature_Review_Group10.pdf)**: Full PDF of our comprehensive review, including related works, proposed method, and future directions.
+- **References**: Cited works are listed in the report.
+
+## Proposed Method
+We suggest extending the SORT framework by incorporating depth data (e.g., from LIDAR or depth estimation models) to improve object association and reduce occlusion-related errors. Key components:
+- **Object Detection**: Extract bounding boxes and descriptors.
+- **Depth Estimation**: Integrate depth maps into tracking.
+- **Kalman Filter + Hungarian Algorithm**: Predict and match states with depth-aware data.
+- **SIFT (Optional)**: Enhance re-identification for unmatched objects.
+
+See Section 4 of the report for technical details and algorithm diagram.
+
+## Getting Started
+This is primarily a literature review repository. To view the report:
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/username/depthmot.git
