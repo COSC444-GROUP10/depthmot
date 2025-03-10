@@ -1,0 +1,25 @@
+# Python-specific
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Data and large files
+data/*
+*.mp4
+*.avi
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+
+# Explicitly include literature review
+!docs/literature-review-report.pdf

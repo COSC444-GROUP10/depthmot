@@ -1,0 +1,8 @@
+# requirements.txt for depthmot with deep learning
+numpy==1.26.4
+scipy==1.12.0
+opencv-python==4.9.0
+torch==2.2.0
+torchvision==0.17.0
+git+https://github.com/ultralytics/yolov5.git@7.0.0
+git+https://github.com/isl-org/MiDaS.git@v3.1
