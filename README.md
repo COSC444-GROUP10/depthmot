@@ -5,20 +5,16 @@ Improving Multi-Object Tracking Using Depth - A Comprehensive Literature Review
 This repository contains a literature review conducted by Group 10 for COSC 444/544: Computer Vision. The project explores Multi-Object Tracking (MOT) challenges, focusing on occlusion and ID switching in pedestrian tracking. We evaluate traditional methods like the Kalman Filter (e.g., SORT) and propose integrating depth information to enhance tracking accuracy and robustness.
 
 ### Authors
-- Allan Cheboiwo (#73661290)
-- Tarek Alkabbani (#84930239)
-- Haoyu Wang (#42343871)
-- Vanessa Laurel Hariyanto (#72484546)
-
-### Course
-- **COSC 444/544: Computer Vision**
-- **Date**: February 24, 2024
+- Allan Cheboiwo 
+- Tarek Alkabbani 
+- Haoyu Wang 
+- Vanessa Laurel Hariyanto
 
 ## Abstract
 Multiple Object Tracking (MOT) is a critical computer vision task used in surveillance, autonomous driving, and traffic monitoring. Despite advances in deep learning, challenges like occlusion and ID switching persist, especially in pedestrian tracking. This review analyzes traditional methods (e.g., Kalman Filter, Hungarian Algorithm) and proposes a depth-enhanced approach to mitigate these issues, balancing accuracy and efficiency for real-world applications.
 
 ## Contents
-- **[Literature Review Report](docs/Literature_Review_Group10.pdf)**: Full PDF of our comprehensive review, including related works, proposed method, and future directions.
+- **[Literature Review Report](docs/Literature%20Review%20Report.pdf)**: Full PDF of our comprehensive review, including related works, proposed method, and future directions.
 - **References**: Cited works are listed in the report.
 
 ## Proposed Method
@@ -34,4 +30,4 @@ See Section 4 of the report for technical details and algorithm diagram.
 This is primarily a literature review repository. To view the report:
 1. Clone the repo:
    ```bash
-   git clone https://github.com/username/depthmot.git
+   git clone https://github.com/COSC444-GROUP10/depthmot.git
