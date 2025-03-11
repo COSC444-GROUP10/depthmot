@@ -1,25 +1,58 @@
-# Python-specific
+# Python
 __pycache__/
 *.py[cod]
-*.egg-info/
-
-# Virtual environments
-venv/
+*$py.class
+*.so
+.Python
 env/
-.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Data and large files
-data/*
-*.mp4
-*.avi
+# Virtual Environment
+venv/
+ENV/
 
-# OS-specific
-.DS_Store
-Thumbs.db
-
-# IDEs
+# IDE files
 .idea/
 .vscode/
+*.swp
+*.swo
+
+# Output files
+output_frames/
+*.mp4
+!data/viratSample.mp4  # Keep the sample video
+frame_*.jpg
+
+# Model weights (will be downloaded automatically)
+*.pt
+!yolov8s.pt  # Keep the YOLOv8 weights if already downloaded
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 
 # Explicitly include literature review
 !docs/literature-review-report.pdf
