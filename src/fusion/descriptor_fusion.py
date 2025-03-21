@@ -27,6 +27,7 @@ class DepthDetectionFusion:
         Returns:
             list: List of 3D descriptors, each descriptor is a dictionary with keys:
                 - 'bbox': [x1, y1, x2, y2] (coordinates of the bounding box)
+                - 'bbox3d': [xmin, ymin, zmin, xmax, ymax, zmax] (3D bounding box for SORT)
                 - 'center_3d': [x, y, z] (3D coordinates of the object center)
                 - 'confidence': Detection confidence
                 - 'class_id': Class ID
@@ -82,9 +83,13 @@ class DepthDetectionFusion:
                 depth_min = depth_max = depth_mean = depth_median = 0.0
                 center_z = 0.0
             
+            # Create 3D bounding box for SORT tracker [xmin, ymin, zmin, xmax, ymax, zmax]
+            bbox3d = [float(x1), float(y1), depth_min, float(x2), float(y2), depth_max]
+            
             # Create 3D descriptor
             descriptor = {
                 'bbox': detection['bbox'],
+                'bbox3d': bbox3d,
                 'center_3d': [float(center_x), float(center_y), float(center_z)],
                 'confidence': detection['confidence'],
                 'class_id': detection['class_id'],
@@ -101,6 +106,30 @@ class DepthDetectionFusion:
             descriptors.append(descriptor)
         
         return descriptors
+    
+    def get_sort_detections(self, descriptors):
+        """
+        Convert descriptors to format suitable for SORT tracker
+        
+        Args:
+            descriptors (list): List of 3D descriptors from process_frame
+            
+        Returns:
+            numpy.ndarray: Array of shape (n, 7) with each row containing [xmin, ymin, zmin, xmax, ymax, zmax, score]
+                           where score is the detection confidence
+        """
+        if not descriptors:
+            return np.empty((0, 7))
+        
+        # Extract 3D bounding boxes and confidence scores for SORT
+        sort_dets = np.zeros((len(descriptors), 7))
+        for i, desc in enumerate(descriptors):
+            # Copy bounding box coordinates
+            sort_dets[i, 0:6] = desc['bbox3d']
+            # Add confidence score
+            sort_dets[i, 6] = desc['confidence']
+            
+        return sort_dets
     
     def visualize(self, frame, descriptors):
         """
@@ -137,5 +166,42 @@ class DepthDetectionFusion:
             
             # Draw coordinates label
             cv2.putText(vis_frame, coords_label, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        
+        return vis_frame
+    
+    def visualize_with_tracking(self, frame, descriptors, tracks):
+        """
+        Visualize the 3D descriptors and tracking information on the frame
+        
+        Args:
+            frame (numpy.ndarray): Input frame in BGR format
+            descriptors (list): List of 3D descriptors
+            tracks (numpy.ndarray): Tracking results from SORT tracker with shape (n, 7)
+                                   where each row is [xmin, ymin, zmin, xmax, ymax, zmax, track_id]
+            
+        Returns:
+            numpy.ndarray: Visualization frame with tracking information
+        """
+        # First visualize the descriptors
+        vis_frame = self.visualize(frame, descriptors)
+        
+        # Then add tracking information
+        if tracks is not None and tracks.shape[0] > 0:
+            for track in tracks:
+                xmin, ymin, zmin, xmax, ymax, zmax, track_id = track
+                # Calculate center for visualization
+                center_x = (xmin + xmax) / 2
+                center_y = (ymin + ymax) / 2
+                
+                # Draw tracked bounding box
+                cv2.rectangle(vis_frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (255, 0, 0), 2)
+                
+                # Draw track ID and depth range
+                cv2.putText(vis_frame, f"ID:{int(track_id)} Z:{zmin:.1f}-{zmax:.1f}", 
+                           (int(xmin), int(ymin) - 10), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+                
+                # Draw track center point
+                cv2.circle(vis_frame, (int(center_x), int(center_y)), 7, (255, 0, 0), -1)
         
         return vis_frame 
