@@ -1,9 +1,9 @@
 # requirements.txt for depthmot with deep learning
-numpy>=1.22.0
-scipy>=1.8.0
+numpy>=1.20.0
+scipy>=1.7.0
 opencv-python>=4.5.0
-torch>=1.12.0
-torchvision>=0.13.0
+torch>=1.9.0
+torchvision>=0.10.0
 # YOLOv8 for object detection
 ultralytics>=8.0.0
 # Additional dependencies
@@ -11,4 +11,5 @@ timm>=0.6.0
 matplotlib>=3.5.0
 # For visualization and processing
 tqdm>=4.64.0
-Pillow>=9.0.0 
+Pillow>=9.0.0
+filterpy>=1.4.5 

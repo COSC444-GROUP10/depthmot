@@ -171,7 +171,7 @@ class DepthDetectionFusion:
     
     def visualize_with_tracking(self, frame, descriptors, tracks):
         """
-        Visualize the 3D descriptors and tracking information on the frame
+        Visualize the tracking information on the frame (only one box with ID per tracked object)
         
         Args:
             frame (numpy.ndarray): Input frame in BGR format
@@ -182,10 +182,16 @@ class DepthDetectionFusion:
         Returns:
             numpy.ndarray: Visualization frame with tracking information
         """
-        # First visualize the descriptors
-        vis_frame = self.visualize(frame, descriptors)
+        # Make a copy of the frame for visualization
+        vis_frame = frame.copy()
         
-        # Then add tracking information
+        # Add depth processing indicator
+        if descriptors and descriptors[0].get('is_new_depth', False):
+            cv2.putText(vis_frame, "Depth: NEW", (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+        else:
+            cv2.putText(vis_frame, "Depth: Cached", (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 165, 255), 2)
+        
+        # Add tracking information
         if tracks is not None and tracks.shape[0] > 0:
             for track in tracks:
                 xmin, ymin, zmin, xmax, ymax, zmax, track_id = track
@@ -194,14 +200,14 @@ class DepthDetectionFusion:
                 center_y = (ymin + ymax) / 2
                 
                 # Draw tracked bounding box
-                cv2.rectangle(vis_frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (255, 0, 0), 2)
+                cv2.rectangle(vis_frame, (int(xmin), int(ymin)), (int(xmax), int(ymax)), (0, 255, 0), 2)
                 
                 # Draw track ID and depth range
-                cv2.putText(vis_frame, f"ID:{int(track_id)} Z:{zmin:.1f}-{zmax:.1f}", 
+                cv2.putText(vis_frame, f"ID:{int(track_id)}", 
                            (int(xmin), int(ymin) - 10), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
                 
                 # Draw track center point
-                cv2.circle(vis_frame, (int(center_x), int(center_y)), 7, (255, 0, 0), -1)
+                cv2.circle(vis_frame, (int(center_x), int(center_y)), 5, (0, 0, 255), -1)
         
-        return vis_frame 
+        return vis_frame

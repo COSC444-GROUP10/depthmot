@@ -99,7 +99,7 @@ class MiDaSDepthEstimator:
         # Convert to numpy array
         depth_map = prediction.cpu().numpy()
         
-        # Normalize depth map
-        depth_map = cv2.normalize(depth_map, None, 0, 1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
+        # # Normalize depth map
+        # depth_map = cv2.normalize(depth_map, None, 0, 1, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_32F)
         
         return depth_map 

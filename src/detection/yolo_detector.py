@@ -21,7 +21,7 @@ class YOLOv5Detector:
         # Load YOLOv5 model using ultralytics
         print(f"Loading YOLOv5 model: {model_name}")
         
-        # For YOLO v8 models
+        # For YOLO v5 models
         if not model_name.startswith("yolov5"):
             self.model = YOLO(model_name)
         else:

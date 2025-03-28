@@ -1,4 +1,6 @@
 """
+    We have modifief the follwwing algorithm and would like to give credit
+    
     SORT: A Simple, Online and Realtime Tracker
     Copyright (C) 2016-2020 Alex Bewley alex@bewley.ai
 
