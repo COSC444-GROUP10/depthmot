@@ -23,12 +23,16 @@ var/
 # Virtual Environment
 venv/
 ENV/
+.venv/
 
 # IDE files
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# Input files
+data/
 
 # Output files
 output_frames/
@@ -56,3 +60,6 @@ Desktop.ini
 
 # Explicitly include literature review
 !docs/literature-review-report.pdf
+
+# TracKEval Repo
+TracKEval/
