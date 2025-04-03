@@ -10,7 +10,7 @@ MIDAS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../M
 sys.path.append(MIDAS_PATH)
 
 # Import MiDaS modules
-from midas.model_loader import default_models, load_model
+#from midas.model_loader import default_models, load_model
 
 class MiDaSDepthEstimator:
     def __init__(self, model_type="MiDaS_small"):
