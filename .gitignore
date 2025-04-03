@@ -82,6 +82,6 @@ ehthumbs.db
 Desktop.ini
 
 # Explicitly include literature review
-!docs/literature-review-report.pdfTrackEval/
+TrackEval/
 data/
 >>>>>>> cfd9026942ecc987e9a5566aff1bbb18b9e5ee5d
